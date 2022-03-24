@@ -11,25 +11,34 @@
 
     <link rel="stylesheet" href="loginvideo.css">
 
+    <style>
+
+        .form-control, .form-control:hover, .form-control:active {
+            background-color: rgba(0,0,0,0.1);
+            color: black!important;
+        }
+
+    </style>
+
 </head>
 
-<body class="bg-dark vh-100">
-    <div class="container-fluid d-flex h-100 justify-content-center align-items-center">
-        <section class="login bg-secondary p-5 shadow-lg rounded">
-            <h1 class="text-center mb-5">Login Page</h1>
+<body class="vh-100">
+    <div class="container-fluid d-flex h-100 justify-content-center align-items-center text-dark">
+        <section class="login bg-secondary p-3 shadow-lg rounded">
+            <p class="text-center text-dark display-1 mb-1">Login Page</p>
 
-            <form id="login-form" class="ms-4 me-4">
-                <div class="mb-3">
-                    <label for="txtEmail" class="form-label">Email Address</label>
-                    <input type="text" class="form-control" name="txtEmail" required>
+            <form id="login-form" class="ms-1 me-1">
+                <div class="mb-1 bg-secondary">
+                    <label for="txtEmail" class="form-label lead text-dark">Email Address:</label>
+                    <input type="text" class="form-control border" name="txtEmail" required>
                 </div>
 
-                <div class="mb-3">
-                    <label for="txtPassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="txtPassword" required>
+                <div class="mb-1">
+                    <label for="txtPassword" class="form-label lead text-dark">Password:</label>
+                    <input type="password" class="form-control border" name="txtPassword" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary w-100 mt-1">Login</button>
             </form>
         </section>
     </div>

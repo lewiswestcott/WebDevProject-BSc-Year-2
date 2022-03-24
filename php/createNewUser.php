@@ -15,6 +15,9 @@ if (!isset($_POST))
 require("_connect.php");
 
 //The SQL statement
+$password = $_POST["txtPassword"];
+$password = password_hash($password, PASSWORD_BCRYPT);
+
 $SQL = "INSERT INTO `users` (`userID`, `email`, `firstName`, `lastName`, `password`, `TIMESTAMP`) VALUES (NULL, ?, ?, ?, ?, current_timestamp())";
 
 //Prepares the SQL statement for execution.

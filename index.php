@@ -7,6 +7,15 @@
         header("Location: ./login.php");
     }
 
+    if($_SESSION['role'] == "user")
+    {
+        header("Location: ./indexuser.php");
+    }
+
+    
+    
+    
+    
     //Only 'admins' should be able to access this page.
 
 ?>
@@ -49,7 +58,7 @@
                             <a class="nav-link active lead text-light" aria-current="page" href="./user.php">User Management</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active lead text-light" aria-current="page" href="./courses.php">Course
+                            <a class="nav-link active lead text-light" aria-current="page" href="./courseadmin.php">Course
                                 Management</a>
                         </li>
                     </ul>
