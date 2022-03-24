@@ -6,13 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./bootstrap.min.css">
+
+
+    <link rel="stylesheet" href="loginvideo.css">
+
 </head>
 
 <body class="bg-dark vh-100">
     <div class="container-fluid d-flex h-100 justify-content-center align-items-center">
-        <section class="login bg-light p-5 shadow-lg rounded">
+        <section class="login bg-secondary p-5 shadow-lg rounded">
             <h1 class="text-center mb-5">Login Page</h1>
 
             <form id="login-form" class="ms-4 me-4">
@@ -30,6 +33,11 @@
             </form>
         </section>
     </div>
+
+    <video autoplay muted loop id="myVideo">
+    <source src="./img/pexels2.mp4" type="video/mp4">
+    </video>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
