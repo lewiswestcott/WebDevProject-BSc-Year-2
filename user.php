@@ -19,19 +19,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-   <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap.min.css">
 
     <style>
-
         * {
-            color: white!important;
+            color: white !important;
         }
-
     </style>
 
 </head>
@@ -51,13 +49,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li class="nav-item">
-                            <a class="nav-link active lead text-light sh" aria-current="page" href="./index.php">Home</a>
+                            <a class="nav-link active lead text-light sh" aria-current="page"
+                                href="./index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active lead text-light" aria-current="page" href="./user.php">User Management</a>
+                            <a class="nav-link active lead text-light" aria-current="page" href="./user.php">User
+                                Management</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active lead text-light" aria-current="page" href="./courses.php">Course
+                            <a class="nav-link active lead text-light" aria-current="page"
+                                href="./courseadmin.php">Course
                                 Management</a>
                         </li>
                     </ul>
@@ -74,19 +75,21 @@
             </div>
         </nav>
 
-    <div class="container card text-dark bg-secondary  mb-3">
-        <table class="table text-light" id="users">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Options</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
+        <div class="container card text-dark bg-secondary  mb-3">
+            <table class="table text-light" id="users">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">User Type</th>
+                        <th scope="col">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
 
                     $SQL = "SELECT * FROM `users`";
 
@@ -98,132 +101,142 @@
                     {
                 ?>
 
-                <tr>
-                    <th scope="row"><?= $user['userID'] ?></th>
-                    <td><?= $user['email'] ?></td>
-                    <td><?= $user['firstName'] ?></td>
-                    <td><?= $user['lastName'] ?></td>
-                    <td>
-                        <div class="btn-group" role="group" userid="<?= $user['userID'] ?>">
+                    <tr>
+                        <th scope="row"><?= $user['userID'] ?></th>
+                        <td><?= $user['email'] ?></td>
+                        <td><?= $user['firstName'] ?></td>
+                        <td><?= $user['lastName'] ?></td>
+                        <td><?= $user['JobRole'] ?></td>
+                        <td><?= $user['role'] ?></td>
+                        <td>
+                            <div class="btn-group" role="group" userid="<?= $user['userID'] ?>">
 
-                            <button type="button" id="editbutton" class="btn btn-warning btn-sm" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Tooltip on top"><i
-                                    class="fa-solid fa-screwdriver-wrench"></i> Edit</button>
-                            <button type="button" class="btn btn-danger btn-sm btnDelete"><i
-                                    class="fa-solid fa-circle-minus"></i> Delete</button>
-                        </div>
-                    </td>
-                </tr>
+                                <button type="button" id="editbutton" class="btn btn-warning btn-sm"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"><i
+                                        class="fa-solid fa-screwdriver-wrench"></i> Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm btnDelete"><i
+                                        class="fa-solid fa-circle-minus"></i> Delete</button>
+                            </div>
+                        </td>
+                    </tr>
 
-                <?php
+                    <?php
                     }
 
                 ?>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-        <button class="btn btn mb-2" id="btnOpenModal">Add User</button>
-    </div>
+            <button class="btn btn mb-2" id="btnOpenModal">Add User</button>
+        </div>
 
-    <div class="modal" tabindex="-1" id="modalOne">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create a new User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal" tabindex="-1" id="modalOne">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create a new User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="./php/createNewUser.php" id="createForm">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" name="txtEmail">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="txtFirst">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="txtLast">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Job Role</label>
+                                <input type="text" class="form-control" name="txtJob">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" name="txtPassword">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Role</label>
+                                <br>
+                                <select class="text-light form-control" name="txtRole">
+                                    <option value=></option>
+                                    <option value=Admin>Admin</option>
+                                    <option value=User>User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
                 </div>
-                <form method="POST" action="./php/createNewUser.php" id="createForm">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" class="form-control" name="txtEmail">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">First Name</label>
-                            <input type="text" class="form-control" name="txtFirst">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control" name="txtLast">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="txtPassword">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
-        integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous">
-    </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+            integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous">
+        </script>
 
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        
-        $(document).ready(function () {
-            $('#users').DataTable();
-        });
-
-        $('#btnOpenModal').click(function () {
-            $('#modalOne').modal('show');
-        });
-
-        $("#createForm").submit(function (event) {
-            //This prevents the default synchronous action.
-            event.preventDefault();
-            
-            $.ajax({
-                //Populates the AJAX request.
-                url: this.action,
-                type: this.method,
-                data: $(this).serialize(),
-                success: function (response)
-                {
-                    alert(response);
-                    location.reload();
-                },
-                error: function()
-                {
-                    //This function will run if the request failed.
-                    alert("Something went wrong with the AJAX call.");
-                }
+        <script>
+            $(document).ready(function () {
+                $('#users').DataTable();
             });
 
-        });
-
-        $('.btnDelete').click(function () {
-            const userID = $(this).parent().attr('userid');
-
-            $.ajax({
-                url: './php/deleteUser.php',
-                type: 'POST',
-                data: {
-                    userID: userID
-                },
-                success: function (response) {
-                    console.log(response);
-                    location.reload();
-
-                }
+            $('#btnOpenModal').click(function () {
+                $('#modalOne').modal('show');
             });
-        });
 
-       
-    </script>
-</body>
+            $("#createForm").submit(function (event) {
+                //This prevents the default synchronous action.
+                event.preventDefault();
 
-    </div>
+                $.ajax({
+                    //Populates the AJAX request.
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        alert(response);
+                        location.reload();
+                    },
+                    error: function () {
+                        //This function will run if the request failed.
+                        alert("Something went wrong with the AJAX call.");
+                    }
+                });
+
+            });
+
+            $('.btnDelete').click(function () {
+                const userID = $(this).parent().attr('userid');
+
+                $.ajax({
+                    url: './php/deleteUser.php',
+                    type: 'POST',
+                    data: {
+                        userID: userID
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        location.reload();
+
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</div>
 
 </html>

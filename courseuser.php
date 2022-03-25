@@ -40,16 +40,12 @@
                             <a class="nav-link active lead text-light sh" aria-current="page" href="./index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active lead text-light" aria-current="page" href="./user.php">User Management</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active lead text-light" aria-current="page" href="./courses.php">Course
-                                Management</a>
+                            <a class="nav-link active lead text-light" aria-current="page" href="./courseuser.php">Courses</a>
                         </li>
                     </ul>
                     <div class="d-flex">
                         <div class="nav-item">
-                            <p class="nav-link lead text-light mb-0 ">Hi!, <?= $_SESSION['firstName']?>
+                            <p class="nav-link lead text-light mb-0 ">Hi, <?= $_SESSION['firstName']?>
                                 <?= $_SESSION['lastName']?></p>
                         </div>
                         <div class="nav-item">

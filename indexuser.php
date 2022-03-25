@@ -48,16 +48,13 @@ if (!isset($_SESSION['userID']))
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link active lead text-light" aria-current="page" href="./courseadmin.php">Courses</a>
+                        <a class="nav-link active lead text-light" aria-current="page" href="./courseuser.php">Courses</a>
                     </li>
                 </ul>
                 <div class="d-flex">
                     <div class="nav-item">
-                        <p class="nav-link lead text-light mb-0 ">Hi!, <?= $_SESSION['firstName']?>
+                        <p class="nav-link lead text-light mb-0 ">Hi, <?= $_SESSION['firstName']?>
                             <?= $_SESSION['lastName']?></p>
-                    </div>
-                    <div class="nav-item">
-                        <p class="nav-link lead" href="./php/mycourses.php">My Courses</p>
                     </div>
                     <div class="nav-item">
                         <a class="nav-link lead" href="./php/logout.php">Logout</a>
