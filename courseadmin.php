@@ -93,7 +93,7 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                                <button type="button" class="btn btn-danger"><i class="fa-solid fa-ban"></i> Delete</button>
+                                <button type="button" class="btn btn-danger btnDelete"><i class="fa-solid fa-ban"></i> Delete</button>
                             </div>
 
                         </td>
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </form>
@@ -171,6 +171,23 @@
                     },
                     success: function (response) {
                         alert(response);
+                    }
+                });
+            });
+
+            $('.btnDelete').click(function () {
+                const courseID = $(this).parent().attr('courseID');
+
+                $.ajax({
+                    url: './php/deletecourse.php',
+                    type: 'POST',
+                    data: {
+                        courseID: courseID
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        location.reload();
+
                     }
                 });
             });
