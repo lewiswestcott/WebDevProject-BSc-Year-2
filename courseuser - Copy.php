@@ -108,9 +108,10 @@
                                 class="card-body">
                             <div class="btn-group" role="group" aria-label="Basic example"
                                 courseID="<?= $course['courseID'] ?>">
-                                <button type="button" class="btn btn-warning btn-lg btnEnrol"><i class="fa-solid fa-pen-to-square"></i>
-                                    Enrol</button>
-                               
+                                <button type="button" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i>
+                                    Edit</button>
+                                <button type="button" class="btn btn-danger btnDeleteCourse"> <i
+                                        class="fa-solid fa-ban"></i> Delete</button>
                             </div>
                 </div>
 

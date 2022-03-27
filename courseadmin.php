@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="./courseadmin.css">
 
- <style>
+    <style>
         .card-container {
             padding: 20px;
             display: grid;
@@ -103,7 +103,7 @@
                         Course #LW<?= $course['courseID'] ?>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fa-solid fa-graduation-cap"></i> <?= $course['courseName'] ?>
+                        <h5 class="card-title"><i class="fa-solid fa-graduation-cap"></i> <?= $course['courseName'] ?> - <?= $course['courseLocation'] ?></li>
                         </h5>
                         <p class="card-text"><?= $course['CourseDesc'] ?></p>
                     </div>
@@ -133,121 +133,121 @@
 
         <button class="btn btn mb-2" id="btnOpenModal">Add Course</button>
 
+</div>
 
 
 
 
 
-
-        <div class="modal" tabindex="-1" id="modalTwo">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Create a new Course</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" action="./php/addcourse.php" id="createForm">
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label class="form-label">Course Name</label>
-                                <input type="text" class="form-control" name="txtCourse">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Course Location</label>
-                                <input type="text" class="form-control" name="txtLocation">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Course Description</label>
-                                <input type="text" class="form-control" name="txtDesc">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Maximum Attendance</label>
-                                <input type="number" class="form-control" name="txtAttend">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Course End Date</label>
-                                <input type="date" class="form-control" name="txtExpire">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                    </form>
-                </div>
+<div class="modal" tabindex="-1" id="modalTwo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create a new Course</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form method="POST" action="./php/addcourse.php" id="createForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Course Name</label>
+                        <input type="text" class="form-control" name="txtCourse">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Course Location</label>
+                        <input type="text" class="form-control" name="txtLocation">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Course Description</label>
+                        <input type="text" class="form-control" name="txtDesc">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Maximum Attendance</label>
+                        <input type="number" class="form-control" name="txtAttend">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Course End Date</label>
+                        <input type="date" class="form-control" name="txtExpire">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
-            integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous">
-        </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+    integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous">
+</script>
 
-        <script>
-             $(document).ready(function () {
-                $('#users').DataTable();
-            });
-           
-           $('#btnOpenModal').click(function () {
-                $('#modalTwo').modal('show');
-            });
+<script>
+    $(document).ready(function () {
+        $('#users').DataTable();
+    });
 
-            $("#createForm").submit(function (event) {
-                //This prevents the default synchronous action.
-                event.preventDefault();
+    $('#btnOpenModal').click(function () {
+        $('#modalTwo').modal('show');
+    });
 
-                $.ajax({
-                    //Populates the AJAX request.
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        alert(response);
-                        location.reload();
-                    },
-                    error: function () {
-                        //This function will run if the request failed.
-                        alert("Something went wrong with the AJAX call.");
-                    }
-                });
+    $("#createForm").submit(function (event) {
+        //This prevents the default synchronous action.
+        event.preventDefault();
 
-            });
+        $.ajax({
+            //Populates the AJAX request.
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (response) {
+                alert(response);
+                location.reload();
+            },
+            error: function () {
+                //This function will run if the request failed.
+                alert("Something went wrong with the AJAX call.");
+            }
+        });
+
+    });
 
 
 
-            $('.btnEnrol').click(function () {
-                const courseID = $(this).attr('courseID');
+    $('.btnEnrol').click(function () {
+        const courseID = $(this).attr('courseID');
 
-                $.ajax({
-                    url: './php/enrol.php',
-                    type: 'POST',
-                    data: {
-                        courseID: courseID
-                    },
-                    success: function (response) {
-                        alert(response);
-                    }
-                });
-            });
+        $.ajax({
+            url: './php/enrol.php',
+            type: 'POST',
+            data: {
+                courseID: courseID
+            },
+            success: function (response) {
+                alert(response);
+            }
+        });
+    });
 
-            $('.btnDeleteCourse').click(function () {
-                const courseID = $(this).parent().attr('courseID');
+    $('.btnDeleteCourse').click(function () {
+        const courseID = $(this).parent().attr('courseID');
 
-                $.ajax({
-                    url: './php/deletecourse.php',
-                    type: 'POST',
-                    data: {
-                        courseID: courseID
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        location.reload();
+        $.ajax({
+            url: './php/deletecourse.php',
+            type: 'POST',
+            data: {
+                courseID: courseID
+            },
+            success: function (response) {
+                console.log(response);
+                location.reload();
 
-                    }
-                });
-            });
-        </script>
-    </body>
+            }
+        });
+    });
+</script>
+</body>
 
 </html>
