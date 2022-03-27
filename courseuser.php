@@ -20,6 +20,19 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./bootstrap.min.css">
 
+        <style>
+        .card-container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: repeat(1, 1fr);
+            gap: 20px;
+            grid-auto-flow: row;
+            grid-template-areas:
+                ". . .";
+        }
+    </style>
+
 </head>
 
 <div class="container py-1">
@@ -81,7 +94,7 @@
                     <td><?= $course['courseLocation'] ?></td>
                     <td><?= $course['TIMESTAMP'] ?></td>
                     <td>  
-                            <button type="button" class="btn btn-primary btn-lg btnEnrol" courseID="<?= $course['courseID'] ?>"><i class="fa-solid fa-check"></i></i></button>
+                            <button type="button" class="btn btn-primary btn-lg btnEnrol" courseID="<?= $result['courseID'] ?>"> <i class="fa-solid fa-check"></i></button>
 
                     </td>
 
@@ -92,6 +105,39 @@
                 ?>
             </tbody>
         </table>
+
+        <div class="container bg-secondary ">
+        <div class="card-container">
+            <?php
+                require("./php/_connect.php");
+                $query = mysqli_query($connect, $SQL);
+                while ($course = mysqli_fetch_assoc($query))
+                {
+            ?>
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    Course #LW<?= $course['courseID'] ?>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-solid fa-graduation-cap"></i> <?= $course['courseName'] ?></h5>
+                    <p class="card-text"><?= $course['CourseDesc'] ?></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">3 out of <?= $course['MaxAttend'] ?> enrollments</li>
+                    <li class="list-group-item">Course Added: <?= $course['TIMESTAMP'] ?></li>
+                    <li class="list-group-item">Course Expiration: <?= $course['CourseExpiry'] ?></</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link text-decoration-none"><i class="fa-solid fa-pen"></i> Edit Course</a>
+                    <a href="#" class="card-link text-decoration-none"><i class="fa-solid fa-xmark"></i> Delete Course</a>
+                </div>
+            </div>
+            <?php
+                }
+            ?>
+        </div>
+    </div>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

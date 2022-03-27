@@ -19,6 +19,21 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./bootstrap.min.css">
 
+    <link rel="stylesheet" href="./courseadmin.css">
+
+ <style>
+        .card-container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: repeat(1, 1fr);
+            gap: 20px;
+            grid-auto-flow: row;
+            grid-template-areas:
+                ". . .";
+        }
+    </style>
+
 </head>
 
 <div class="container py-1">
@@ -62,52 +77,67 @@
             </div>
         </nav>
         <div class="container card text-dark bg-secondary  mb-3">
-            <table class="table" id="users">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Course Name</th>
-                        <th scope="col">Course Location</th>
-                        <th scope="col">Course Description</th>
-                        <th scope="col">Maximum Attendance</th>
-                        <th scope="col">Course Added</th>
-                        <th scope="col">Options</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+            <?php
                     $SQL = "SELECT *, (SELECT IF (`courseLink`.`courseID` = `course`.`courseID` AND `courseLink`.`userID` = 1, 'true', 'false') FROM `courseLink` LIMIT 1) AS `isEnrolled` FROM `course`;";
                     require("./php/_connect.php");
                     $query = mysqli_query($connect, $SQL);
                     while ($course = mysqli_fetch_assoc($query))
                     {
                 ?>
-                    <tr>
-                        <th scope="row"><?= $course['courseID'] ?></th>
-                        <td><?= $course['courseName'] ?></td>
-                        <td><?= $course['courseLocation'] ?></td>
-                        <td><?= $course['CourseDesc'] ?></td>
-                        <td><?= $course['MaxAttend'] ?></td>
-                        <td><?= $course['TIMESTAMP'] ?></td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                                <button type="button" class="btn btn-danger"><i class="fa-solid fa-ban"></i> Delete</button>
-                            </div>
 
-                        </td>
-
-                        </td>
-                    </tr>
-                    <?php
+            <?php
                     }
                 ?>
-                </tbody>
-            </table>
-            <button class="btn btn mb-2" id="btnOpenModal">Add Course</button>
+
+
+            <div class="card-container">
+                <?php
+                require("./php/_connect.php");
+                $query = mysqli_query($connect, $SQL);
+                while ($course = mysqli_fetch_assoc($query))
+                {
+            ?>
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        Course #LW<?= $course['courseID'] ?>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fa-solid fa-graduation-cap"></i> <?= $course['courseName'] ?>
+                        </h5>
+                        <p class="card-text"><?= $course['CourseDesc'] ?></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">3 out of <?= $course['MaxAttend'] ?> enrollments</li>
+                        <li class="list-group-item">Course Added: <?= $course['TIMESTAMP'] ?></li>
+                        <li class="list-group-item">Course Expiration: <?= $course['CourseExpiry'] ?></</li> </ul> <div
+                                class="card-body">
+                            <div class="btn-group" role="group" aria-label="Basic example"
+                                courseID="<?= $course['courseID'] ?>">
+                                <button type="button" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i>
+                                    Edit</button>
+                                <button type="button" class="btn btn-danger btnDeleteCourse"> <i
+                                        class="fa-solid fa-ban"></i> Delete</button>
+                            </div>
+                </div>
+
+
+
+            </div>
+
+            <?php
+                }
+            ?>
 
         </div>
+
+        <button class="btn btn mb-2" id="btnOpenModal">Add Course</button>
+
+
+
+
+
+
 
         <div class="modal" tabindex="-1" id="modalTwo">
             <div class="modal-dialog">
@@ -155,9 +185,35 @@
         </script>
 
         <script>
-            $('#btnOpenModal').click(function () {
+             $(document).ready(function () {
+                $('#users').DataTable();
+            });
+           
+           $('#btnOpenModal').click(function () {
                 $('#modalTwo').modal('show');
             });
+
+            $("#createForm").submit(function (event) {
+                //This prevents the default synchronous action.
+                event.preventDefault();
+
+                $.ajax({
+                    //Populates the AJAX request.
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        alert(response);
+                        location.reload();
+                    },
+                    error: function () {
+                        //This function will run if the request failed.
+                        alert("Something went wrong with the AJAX call.");
+                    }
+                });
+
+            });
+
 
 
             $('.btnEnrol').click(function () {
@@ -175,6 +231,22 @@
                 });
             });
 
+            $('.btnDeleteCourse').click(function () {
+                const courseID = $(this).parent().attr('courseID');
+
+                $.ajax({
+                    url: './php/deletecourse.php',
+                    type: 'POST',
+                    data: {
+                        courseID: courseID
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        location.reload();
+
+                    }
+                });
+            });
         </script>
     </body>
 

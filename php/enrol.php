@@ -11,7 +11,7 @@ if (!isset($_POST['courseID']))
     die("No courseID was provided.");
 //Connect to the database
 require("_connect.php");
-$holidayID = $_POST['courseID'];
+$courseID = $_POST['courseID'];
 
 //check holiday isnt full code here//code here count mysql
 

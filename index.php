@@ -7,7 +7,7 @@
         header("Location: ./login.php");
     }
 
-    if($_SESSION['role'] == "user")
+    if($_SESSION['role'] == "User")
     {
         header("Location: ./indexuser.php");
     }
