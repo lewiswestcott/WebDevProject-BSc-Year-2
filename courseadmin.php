@@ -2,6 +2,17 @@
 
     session_start();
 
+
+    if($_SESSION['role'] == "User")
+    {
+        header("Location: ./courseuser.php");
+    }
+
+                       
+
+
+
+
 ?>
 
 <!DOCTYPE>
@@ -103,12 +114,23 @@
                         Course #LW<?= $course['courseID'] ?>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fa-solid fa-graduation-cap"></i> <?= $course['courseName'] ?> - <?= $course['courseLocation'] ?></li>
+                        <h5 class="card-title"><i class="fa-solid fa-graduation-cap"></i> <?= $course['courseName'] ?> -
+                            <?= $course['courseLocation'] ?></li>
                         </h5>
                         <p class="card-text"><?= $course['CourseDesc'] ?></p>
                     </div>
+
+
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">3 out of <?= $course['MaxAttend'] ?> enrollments</li>
+
+                        <?php
+                        $courseID = $course['courseID'];
+                        $selectfromcourse = mysqli_query($connect, "SELECT * FROM courseLink WHERE courseID = $courseID");
+                        $attendees = mysqli_num_rows($selectfromcourse);
+                        ?>
+
+                        <li class="list-group-item"><?= $attendees ?> out of <?= $course['MaxAttend'] ?> enrollments
+                        </li>
                         <li class="list-group-item">Course Added: <?= $course['TIMESTAMP'] ?></li>
                         <li class="list-group-item">Course Expiration: <?= $course['CourseExpiry'] ?></</li> </ul> <div
                                 class="card-body">
@@ -174,6 +196,24 @@
                     <button type="submit" class="btn btn-primary">Create</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="CourseCreated">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>

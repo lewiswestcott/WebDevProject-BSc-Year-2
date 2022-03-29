@@ -26,12 +26,13 @@ mysqli_stmt_bind_param($stmt, 'sssss', $_POST['txtCourse'], $_POST['txtLocation'
 //Executes the prepared query.
 if (mysqli_stmt_execute($stmt))
 {
-    echo "User Created";
+
 }
 else
 {
-    echo "Error: " . mysqli_error($connect);
+    echo"Error";
 }
 
+    
 //Closes the prepared statement.
 mysqli_stmt_close($stmt);

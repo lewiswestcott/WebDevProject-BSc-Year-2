@@ -105,15 +105,13 @@
                     </div>
                     <ul class="list-group list-group-flush">
 
-                        <?=
+                    <?php
                         $courseID = $course['courseID'];
-                        $selectfromcourse = mysqli_query("SELECT * FROM courseLink WHERE courseID = $courseID");
+                        $selectfromcourse = mysqli_query($connect, "SELECT * FROM courseLink WHERE courseID = $courseID");
                         $attendees = mysqli_num_rows($selectfromcourse);
-
                         ?>
 
-                        <li class="list-group-item"><?= $course['c'] ?> out of <?= $course['MaxAttend'] ?> enrollments
-                        </li>
+                        <li class="list-group-item"><?= $attendees ?> out of <?= $course['MaxAttend'] ?> enrollments
                         <li class="list-group-item">Course Added: <?= $course['TIMESTAMP'] ?></li>
                         <li class="list-group-item">Course Expiration: <?= $course['CourseExpiry'] ?></</li> </ul> <div
                                 class="card-body">
