@@ -111,9 +111,9 @@
                         <td>
                             <div class="btn-group" role="group" userid="<?= $user['userID'] ?>">
 
-                                <button type="button" id="editbutton" class="btn btn-warning btn-sm"
+                                <button type="button" class="btn btn-warning btn-sm btnEditModal"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"><i
-                                        class="fa-solid fa-screwdriver-wrench"></i> Edit</button>
+                                        class="fa-solid fa-screwdriver-wrench "></i> Edit</button>
                                 <button type="button" class="btn btn-danger btn-sm btnDelete"><i
                                         class="fa-solid fa-circle-minus"></i> Delete</button>
                             </div>
@@ -164,7 +164,6 @@
                                 <label class="form-label">Role</label>
                                 <br>
                                 <select class="text-light form-control" name="txtRole">
-                                    <option value=></option>
                                     <option value=Admin>Admin</option>
                                     <option value=User>User</option>
                                 </select>
@@ -173,6 +172,56 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+<!--         edit user
+ -->        
+ 
+    <div class="modal" tabindex="-1" id="modalTwo">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="./php/updateuser.php" id="UpdateForm">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" name="txtEmail" id="txtEmail">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="txtFirst" id="txtFirst">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="txtLast" id="txtLast">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Job Role</label>
+                                <input type="text" class="form-control" name="txtJob" id="txtJob">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" name="txtPassword" id="txtPassword">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Role</label>
+                                <br>
+                                <select class="text-light form-control" name="txtRole" id="txtRole">
+                                    <option value=Admin>Admin</option>
+                                    <option value=User>User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Confirm</button>
                         </div>
                     </form>
                 </div>
@@ -195,6 +244,54 @@
 
             $('#btnOpenModal').click(function () {
                 $('#modalOne').modal('show');
+            });
+
+            $('.btnEditModal').click(function () {
+                $('#modalTwo').modal('toggle');
+
+                $.ajax({
+                    method: "post",
+                    url: './php/fetchuser.php',
+                    data: {
+                        userID : $(this).parent().attr("userid")
+                    },
+                    success: function(result) {
+                        console.log(result);
+                        var user = JSON.parse(result);
+                        $("#txtFirst").val(user.firstName);
+                        $("#txtLast").val(user.firstName);
+                        $("#edituserID").val(user.userID);
+                        $("#txtEmail").val(user.email);
+                        $("#txtRole").val(user.role);
+                        $("#txtJob").val(user.JobRole);
+                        $("#editUserModal").modal('toggle');
+
+                        
+                    }
+
+                })
+
+            });
+
+            $("#UpdateForm").submit(function (event) {
+                //This prevents the default synchronous action.
+                event.preventDefault();
+
+                $.ajax({
+                    //Populates the AJAX request.
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        alert(response);
+                        location.reload();
+                    },
+                    error: function () {
+                        //This function will run if the request failed.
+                        alert("Something went wrong with the AJAX call.");
+                    }
+                });
+
             });
 
             $("#createForm").submit(function (event) {
