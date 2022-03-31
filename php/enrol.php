@@ -32,7 +32,7 @@ if ($isAlreadyEnrolled['isEnrolled'] == "true")
 $selectfromcourse = mysqli_query($connect, "SELECT * FROM courseLink WHERE courseID = $courseID");
 $attendees = mysqli_num_rows($selectfromcourse);
 
-if ($attendees <= $isAlreadyEnrolled['MaxAttend'])
+if ($attendees >= $isAlreadyEnrolled['MaxAttend'])
 {
     die("The course is full, please enrol on a different course");
 }
