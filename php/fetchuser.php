@@ -12,6 +12,4 @@ $result = mysqli_fetch_assoc($query);
 echo JSON_encode($result);
 return;
 
-
-
 ?>
