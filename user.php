@@ -220,6 +220,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" name="txtUserID" id="txtUserID">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Confirm</button>
                         </div>
@@ -260,7 +261,7 @@
                         var user = JSON.parse(result);
                         $("#txtFirst").val(user.firstName);
                         $("#txtLast").val(user.firstName);
-                        $("#edituserID").val(user.userID);
+                        $("#txtUserID").val(user.userID);
                         $("#txtEmail").val(user.email);
                         $("#txtRole").val(user.role);
                         $("#txtJob").val(user.JobRole);
@@ -271,6 +272,21 @@
 
                 })
 
+            });
+
+            $('#UpdateForm').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    method: "post",
+                    url: './php/updateuser.php',
+                    data: $('#UpdateForm').serialize(),
+                    success: function(result) {
+                        var res=JSON.parse(result);
+                        $('#editUserModal').modal('toggle');
+                        location.reload();
+                    }
+
+                })
             });
 
             $("#UpdateForm").submit(function (event) {
