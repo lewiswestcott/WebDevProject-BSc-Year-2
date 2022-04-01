@@ -12,7 +12,6 @@
     {
         $attempts = 0;
     }
-    echo $attempts;
     if ($attempts >= 3)
     {
          die("Too Many Attempts");
