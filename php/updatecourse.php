@@ -23,7 +23,8 @@ $stmt = mysqli_prepare($connect, $SQL);
 $stmt->bind_param("ssssss", $Course, $Location, $Desc, $MaxAttend, $Expire, $CourseID);
 
 if ($stmt->execute()) {
-    echo "Course updated successfully";
+    //die("Course updated successfully");
+    header("Location:../courseadmin.php");
 } else {
     $mysqli->rollback();
     echo "Error: " . $SQL . "<br>" . mysqli_error($connect);

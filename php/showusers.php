@@ -26,11 +26,11 @@ while ($course = mysqli_fetch_assoc($result))
 
     echo "<td>" . $course['courseID'] . "</td>";
     echo "<td>" . $course['userID'] . "</td>";
-    echo "<td>" . $course['firstname'] . "</td>";
-    echo "<td>" . $course['lastname'] . "</td>";
+    echo "<td>" . $course['firstName'] . "</td>";
+    echo "<td>" . $course['lastName'] . "</td>";
     echo "<td>" . $course['email'] . "</td>";
     echo "<td>" . $course['JobRole'] . "</td>";
-    echo "<td>" . $course['Rrle'] . "</td>";
+    echo "<td>" . $course['role'] . "</td>";
     echo "<td>" .'<a href="./php/unenrol.php?userID=' . urlencode($course['userID']) . '&courseID=' . urlencode($courseID) . '" class="btn btn-secondary">Delete</a>' . "</td>";
     echo "</tr>";
 }

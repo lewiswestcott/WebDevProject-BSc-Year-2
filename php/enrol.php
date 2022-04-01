@@ -21,9 +21,9 @@ $SQL = "SELECT *, (SELECT IF (`courseLink`.`courseID` = `course`.`courseID` AND 
 
 $isAlreadyEnrolled = mysqli_fetch_assoc(mysqli_query($connect, $SQL));
 
-// var_dump($isAlreadyEnrolled);
+var_dump($isAlreadyEnrolled);
 
-if ($isAlreadyEnrolled['isEnrolled'] == "true")
+if ($isAlreadyEnrolled['isEnrolled'] == 1)
 {
     die("Sorry, you are already enrolled on this course.");
 }
@@ -39,20 +39,20 @@ if ($attendees >= $isAlreadyEnrolled['MaxAttend'])
 
 $SQL = "INSERT INTO `courseLink` (`linkID`, `courseID`, `userID`, `TIMESTAMP`) VALUES (NULL, '$courseID', '$uid', current_timestamp())";
 
-$email = "SELECT * FROM `course` WHERE `courseID` = $courseID";
+/* $email = "SELECT * FROM `course` WHERE `courseID` = $courseID"; */
 // die($SQL);
 
 if (mysqli_query($connect, $SQL))
 {
     echo "You have been enrolled on the course!";
-    $address = $_SESSION['email'];
+    /* $address = $_SESSION['email'];
     $subject = "You have been enrolled on " .  $email['courseName'];
 
     $emailContent = "You have been enrolled on " . $email['courseName'];
 
     $headers = "From: noreply@courselink.com" . "\r\n";
 
-    mail($address, $subject, $emailContent, $headers);
+    mail($address, $subject, $emailContent, $headers); */
 }
 else
     echo "An error has occoured.";
