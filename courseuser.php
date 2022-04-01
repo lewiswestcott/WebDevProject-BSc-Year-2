@@ -40,7 +40,6 @@
                     ".";
             }
         }
-
     </style>
 
 </head>
@@ -81,7 +80,7 @@
             </div>
         </nav>
 
-
+        
         <div class="container card text-dark bg-secondary  mb-3">
 
             <?php
@@ -145,25 +144,24 @@
 
         </div>
 
-        
+
 
 
 </div>
 
 <footer>
-            <div class="container py-1">
-                <div class="col-12">
-                    <div class="container border-top mb-2">
+    <div class="container py-1">
+        <div class="col-12">
+            <div class="container border-top mb-2">
 
-                        <div class="">
-                            <p class="lead mt-2 text-center">&copy; <img src="./img/logo.svg" class="mb-1"
-                                    height="17px">
-                                <?php echo date ('Y'); ?></p>
+                <div class="">
+                    <p class="lead mt-2 text-center">&copy; <img src="./img/logo.svg" class="mb-1" height="17px">
+                        <?php echo date ('Y'); ?></p>
 
-                        </div>
-                    </div>
                 </div>
-        </footer>
+            </div>
+        </div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

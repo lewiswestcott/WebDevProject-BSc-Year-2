@@ -49,7 +49,6 @@ if (!isset($_SESSION['userID']))
                     ".";
             }
         }
-
     </style>
 
 </head>
@@ -103,7 +102,17 @@ if (!isset($_SESSION['userID']))
 
         </div>
 
-
+        <div class="col-12">
+            <div class="card text-dark bg-primary mb-2">
+                <div class="card-header">Your Courses</div>
+                <div class="card-body">
+                    <iframe width="100%" height="500px" src="https://www.youtube.com/embed/uVh9y4YY5jo"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
 
         <div class="col-12">
             <div class="card text-dark bg-primary mb-2">

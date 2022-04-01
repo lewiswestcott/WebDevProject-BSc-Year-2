@@ -3,6 +3,23 @@
     //Connect to the database.
     require("_connect.php");
 
+    //extra functionality
+    if (isset($_SESSION['attempts']))
+    {
+        $attempts = $_SESSION['attempts'];
+    }
+    else
+    {
+        $attempts = 0;
+    }
+    echo $attempts;
+    if ($attempts >= 3)
+    {
+         die("Too Many Attempts");
+    }
+    $attempts++;
+    $_SESSION['attempts'] = $attempts;
+
     //Ensure that the user has provided all required fields.
     if (!isset($_POST['txtEmail'], $_POST['txtPassword']))
     {
@@ -60,7 +77,7 @@
     //Check if the password is correct.
     if (password_verify($password, $USER['password']))
     {
-
+        $_SESSION['attempts'] = 0;
         $_SESSION['userID'] = $USER['userID'];
         $_SESSION['firstName'] = $USER['firstName'];
         $_SESSION['lastName'] = $USER['lastName'];
