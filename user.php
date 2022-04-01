@@ -34,6 +34,16 @@
         * {
             color: white !important;
         }
+
+        @media screen and (max-width: 1000px) {
+            .admintable {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(2, 1fr);
+                grid-template-areas:
+                    "."
+                    ".";
+            }
+        }
     </style>
 
 </head>
@@ -79,21 +89,22 @@
             </div>
         </nav>
 
-        <div class="container card text-dark bg-secondary  mb-3">
-            <table class="table text-light" id="users">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Job Title</th>
-                        <th scope="col">User Type</th>
-                        <th scope="col">Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+        <div class="admintable">
+            <div class="container card text-dark bg-secondary  mb-3">
+                <table class="table text-light" id="users">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Job Title</th>
+                            <th scope="col">User Type</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
 
                     $SQL = "SELECT * FROM `users`";
 
@@ -105,87 +116,88 @@
                     {
                 ?>
 
-                    <tr>
-                        <th scope="row"><?= $user['userID'] ?></th>
-                        <td><?= $user['email'] ?></td>
-                        <td><?= $user['firstName'] ?></td>
-                        <td><?= $user['lastName'] ?></td>
-                        <td><?= $user['JobRole'] ?></td>
-                        <td><?= $user['role'] ?></td>
-                        <td>
-                            <div class="btn-group" role="group" userid="<?= $user['userID'] ?>">
+                        <tr>
+                            <th scope="row"><?= $user['userID'] ?></th>
+                            <td><?= $user['email'] ?></td>
+                            <td><?= $user['firstName'] ?></td>
+                            <td><?= $user['lastName'] ?></td>
+                            <td><?= $user['JobRole'] ?></td>
+                            <td><?= $user['role'] ?></td>
+                            <td>
+                                <div class="btn-group" role="group" userid="<?= $user['userID'] ?>">
 
-                                <button type="button" class="btn btn-warning btn-sm btnEditModal"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"><i
-                                        class="fa-solid fa-screwdriver-wrench "></i> Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm btnDelete"><i
-                                        class="fa-solid fa-circle-minus"></i> Delete</button>
-                            </div>
-                        </td>
-                    </tr>
+                                    <button type="button" class="btn btn-warning btn-sm btnEditModal"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"><i
+                                            class="fa-solid fa-screwdriver-wrench "></i> Edit</button>
+                                    <button type="button" class="btn btn-danger btn-sm btnDelete"><i
+                                            class="fa-solid fa-circle-minus"></i> Delete</button>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <?php
+                        <?php
                     }
 
                 ?>
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            <button class="btn btn mb-2" id="btnOpenModal">Add User</button>
-        </div>
+                <button class="btn btn mb-2" id="btnOpenModal">Add User</button>
+            </div>
 
-        <div class="modal" tabindex="-1" id="modalOne">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Create a new User</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal" tabindex="-1" id="modalOne">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create a new User</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="POST" action="./php/createNewUser.php" id="createForm">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" name="txtEmail">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" name="txtFirst">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" name="txtLast">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Job Role</label>
+                                    <input type="text" class="form-control" name="txtJob">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="txtPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Role</label>
+                                    <br>
+                                    <select class="text-light form-control" name="txtRole">
+                                        <option value=Admin>Admin</option>
+                                        <option value=User>User</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
                     </div>
-                    <form method="POST" action="./php/createNewUser.php" id="createForm">
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" name="txtEmail">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">First Name</label>
-                                <input type="text" class="form-control" name="txtFirst">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control" name="txtLast">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Job Role</label>
-                                <input type="text" class="form-control" name="txtJob">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control" name="txtPassword">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Role</label>
-                                <br>
-                                <select class="text-light form-control" name="txtRole">
-                                    <option value=Admin>Admin</option>
-                                    <option value=User>User</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
 
-<!--         edit user
- -->        
- 
-    <div class="modal" tabindex="-1" id="modalTwo">
+        <!--         edit user
+ -->
+
+        <div class="modal" tabindex="-1" id="modalTwo">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -234,18 +246,19 @@
         </div>
 
         <footer>
-    <div class="container py-1">
-        <div class="col-12">
-            <div class="container border-top mb-2">
+            <div class="container py-1">
+                <div class="col-12">
+                    <div class="container border-top mb-2">
 
-                <div class="">
-                    <p class="lead mt-2 text-center">&copy; <img src="./img/logo.svg" class="mb-1" height="17px">
-                        <?php echo date ('Y'); ?></p>
+                        <div class="">
+                            <p class="lead mt-2 text-center">&copy; <img src="./img/logo.svg" class="mb-1"
+                                    height="17px">
+                                <?php echo date ('Y'); ?></p>
 
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-</footer>
+        </footer>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -272,9 +285,9 @@
                     method: "post",
                     url: './php/fetchuser.php',
                     data: {
-                        userID : $(this).parent().attr("userid")
+                        userID: $(this).parent().attr("userid")
                     },
-                    success: function(result) {
+                    success: function (result) {
                         console.log(result);
                         var user = JSON.parse(result);
                         $("#txtFirst").val(user.firstName);
@@ -285,7 +298,7 @@
                         $("#txtJob").val(user.JobRole);
                         $("#editUserModal").modal('toggle');
 
-                        
+
                     }
 
                 })
@@ -298,8 +311,8 @@
                     method: "post",
                     url: './php/updateuser.php',
                     data: $('#UpdateForm').serialize(),
-                    success: function(result) {
-                        var res=JSON.parse(result);
+                    success: function (result) {
+                        var res = JSON.parse(result);
                         $('#editUserModal').modal('toggle');
                         location.reload();
                     }

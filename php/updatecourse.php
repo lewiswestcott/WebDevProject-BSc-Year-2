@@ -7,23 +7,26 @@ if (!isset($_SESSION['userID'])) {
 
 include_once("./_connect.php");
 
-$userID = $_POST["txtUserID"];
-$email = $_POST["txtEmail"];
-$firstName = $_POST["txtFirst"];
-$lastName = $_POST["txtLast"];
-$jobTitle = $_POST["txtJob"];
-$accessLevel = $_POST["txtRole"];
+$CourseID = $_POST['txtCourseID'];
+$Course = $_POST["txtCourse"];
+$Location = $_POST["txtLocation"];
+$Desc = $_POST["txtDesc"];
+$MaxAttend = $_POST["txtAttend"];
+$Expire = $_POST["txtExpire"];
 
 //prepare statement
-$SQL="UPDATE `users` SET `email`=?,`firstName`=?,`lastName`=?,`JobRole`=?,`role`= ? WHERE `userID`=?";
+
+$SQL = "UPDATE `course` SET `courseName` = ?, `courseLocation` = ?, `CourseDesc` = ?, `MaxAttend` = ?, `CourseExpiry` = ? WHERE `courseID` = ?";
+
 $stmt = mysqli_prepare($connect, $SQL);
-$stmt->bind_param("ssssss", $email, $firstName, $lastName, $jobTitle, $accessLevel, $userID);
+
+$stmt->bind_param("ssssss", $Course, $Location, $Desc, $MaxAttend, $Expire, $CourseID);
+
 if ($stmt->execute()) {
-    echo json_encode(array("statusCode" => 200));
-}
-else {
+    echo "Course updated successfully";
+} else {
     $mysqli->rollback();
-    echo json_encode(array("statusCode" => 201));
+    echo "Error: " . $SQL . "<br>" . mysqli_error($connect);
 }
 $stmt->close();
 ?>

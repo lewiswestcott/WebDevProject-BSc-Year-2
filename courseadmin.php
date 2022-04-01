@@ -15,7 +15,7 @@
 
 ?>
 
-<!DOCTYPE>
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -42,6 +42,16 @@
             grid-auto-flow: row;
             grid-template-areas:
                 ". . .";
+        }
+
+        @media screen and (max-width: 600px) {
+            .card-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(2, 1fr);
+                grid-template-areas:
+                    "."
+                    ".";
+            }
         }
     </style>
 
@@ -136,9 +146,11 @@
                                 class="card-body">
                             <div class="btn-group" role="group" aria-label="Basic example"
                                 courseID="<?= $course['courseID'] ?>">
-                                <button type="button" id="btnEditModal" class="btn btn-warning btnEditModal"><i class="fa-solid fa-pen-to-square"></i>
+                                <button type="button" id="btnView" class="btn btn-warning btnView btn-sm"><i class="fa-solid fa-magnifying-glass"></i>
+                                    View</button>
+                                <button type="button" id="btnEditModal" class="btn btn-warning btnEditModal btn-sm"><i class="fa-solid fa-pen-to-square"></i>
                                     Edit</button>
-                                <button type="button"  class="btn btn-danger btnDeleteCourse"> <i
+                                <button type="button"  class="btn btn-danger btnDeleteCourse btn-sm"> <i
                                         class="fa-solid fa-ban"></i> Delete</button>
                             </div>
                 </div>
@@ -211,7 +223,7 @@
                 <h5 class="modal-title">Edit a Course</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="./php/editcourse.php" id="createForm">
+            <form method="POST" action="./php/updatecourse.php" id="createForm">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Course Name</label>
@@ -239,6 +251,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                <input type="hidden" name="txtCourseID" id="txtCourseID">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
@@ -264,6 +277,40 @@
         </div>
     </div>
 </div>
+
+<div class="table-responsive">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+        <div class="modal-header">
+                Users Enrolled
+        </div>
+        <div class="modal-body">
+        <table class="table" id="users">
+                <thead>
+                    <tr>
+                        <th scope="col">Course ID</th>
+                        <th scope="col">User ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Options</th>
+                    </tr>
+                </thead>
+                <tbody id="viewUsersData">
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
 
 <footer>
     <div class="container py-1">
@@ -309,7 +356,7 @@
 
                 $("#txtCourse").val(course.courseName);
                 $("#txtLocation").val(course.courseLocation);
-                $("#edituserID").val(course.userID);
+                $("#txtCourseID").val(course.courseID);
                 $("#txtDesc").val(course.CourseDesc);
                 $("#txtAttend").val(course.MaxAttend);
                 $("#txtExpire").val(course.CourseExpiry);
@@ -393,21 +440,20 @@
 
     });
 
-    function getMessages()
-    {
-        $.ajax({
-            url: 'backend.php',
-            type: 'GET',
-            success: function(data) {
-                console.log(data);
-                $('#messages').html(data);
-            }
+    $('.btnView').click(function () {
+            const courseID = $(this).parent().attr('courseID');
+            $.ajax({
+                url: './php/showusers.php',
+                type: 'POST',
+                data: {
+                    courseID: courseID
+                },
+                success: function (response) {
+                    $('#viewUsersData').html(response);
+                    $('#exampleModal').modal('show');
+                }
+            });
         });
-    }
-
-    setInterval(getMessages, 1000);
-
-
 </script>
 </body>
 
