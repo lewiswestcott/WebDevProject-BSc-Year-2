@@ -39,6 +39,17 @@ if (!isset($_SESSION['userID']))
             grid-template-areas:
                 ". . .";
         }
+
+        @media screen and (max-width: 600px) {
+            .card-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(2, 1fr);
+                grid-template-areas:
+                    "."
+                    ".";
+            }
+        }
+
     </style>
 
 </head>

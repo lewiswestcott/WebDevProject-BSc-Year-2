@@ -190,6 +190,10 @@
                         <label class="form-label">Course End Date</label>
                         <input type="date" class="form-control" name="txtExpire">
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Duration</label>
+                        <input type="text" class="form-control" name="txtDuration" id="txtDuration">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -215,19 +219,23 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Course Location</label>
-                        <input type="text" class="form-control" name="txtLocation">
+                        <input type="text" class="form-control" name="txtLocation" id="txtLocation">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Course Description</label>
-                        <input type="text" class="form-control" name="txtDesc">
+                        <input type="text" class="form-control" name="txtDesc" id="txtDesc"> 
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Maximum Attendance</label>
-                        <input type="number" class="form-control" name="txtAttend">
+                        <input type="number" class="form-control" name="txtAttend" id="txtAttend">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Course End Date</label>
-                        <input type="date" class="form-control" name="txtExpire">
+                        <input type="date" class="form-control" name="txtExpire" id="txtExpire">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Duration</label>
+                        <input type="text" class="form-control" name="txtDuration" id="txtDuration">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -257,6 +265,20 @@
     </div>
 </div>
 
+<footer>
+    <div class="container py-1">
+        <div class="col-12">
+            <div class="container border-top mb-2">
+
+                <div class="">
+                    <p class="lead mt-2 text-center">&copy; <img src="./img/logo.svg" class="mb-1" height="17px">
+                        <?php echo date ('Y'); ?></p>
+
+                </div>
+            </div>
+        </div>
+</footer>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
@@ -285,7 +307,7 @@
                 var course = JSON.parse(result);
                 console.log(course);
 
-                $("#txtCourse").val(course.courseID);
+                $("#txtCourse").val(course.courseName);
                 $("#txtLocation").val(course.courseLocation);
                 $("#edituserID").val(course.userID);
                 $("#txtDesc").val(course.CourseDesc);
@@ -352,6 +374,40 @@
             }
         });
     });
+
+    $('#sendMessage').submit(function(e) {
+        e.preventDefault();
+
+        const msg = $('#msg').val();
+
+        $.ajax({
+            url: 'send.php',
+            type: 'POST',
+            data: {
+                msg: msg
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+
+    });
+
+    function getMessages()
+    {
+        $.ajax({
+            url: 'backend.php',
+            type: 'GET',
+            success: function(data) {
+                console.log(data);
+                $('#messages').html(data);
+            }
+        });
+    }
+
+    setInterval(getMessages, 1000);
+
+
 </script>
 </body>
 

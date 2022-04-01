@@ -30,6 +30,17 @@
             grid-template-areas:
                 ". . .";
         }
+
+        @media screen and (max-width: 600px) {
+            .card-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(2, 1fr);
+                grid-template-areas:
+                    "."
+                    ".";
+            }
+        }
+
     </style>
 
 </head>
@@ -105,7 +116,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
 
-                    <?php
+                        <?php
                         $courseID = $course['courseID'];
                         $selectfromcourse = mysqli_query($connect, "SELECT * FROM courseLink WHERE courseID = $courseID");
                         $attendees = mysqli_num_rows($selectfromcourse);
@@ -134,8 +145,26 @@
 
         </div>
 
+        
+
 
 </div>
+
+<footer>
+            <div class="container py-1">
+                <div class="col-12">
+                    <div class="container border-top mb-2">
+
+                        <div class="">
+                            <p class="lead mt-2 text-center">&copy; <img src="./img/logo.svg" class="mb-1"
+                                    height="17px">
+                                <?php echo date ('Y'); ?></p>
+
+                        </div>
+                    </div>
+                </div>
+        </footer>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"

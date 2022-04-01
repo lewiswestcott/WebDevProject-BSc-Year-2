@@ -8,6 +8,10 @@
     }
 
     //Only 'admins' should be able to access this page.
+    if($_SESSION['role'] == "User")
+    {
+        header("Location: ./courseuser.php");
+    }
 
 ?>
 
@@ -18,7 +22,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>User Administration</title>
     <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -228,6 +232,20 @@
                 </div>
             </div>
         </div>
+
+        <footer>
+    <div class="container py-1">
+        <div class="col-12">
+            <div class="container border-top mb-2">
+
+                <div class="">
+                    <p class="lead mt-2 text-center">&copy; <img src="./img/logo.svg" class="mb-1" height="17px">
+                        <?php echo date ('Y'); ?></p>
+
+                </div>
+            </div>
+        </div>
+</footer>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
